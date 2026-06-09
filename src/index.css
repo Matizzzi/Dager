@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Inter:wght@400;600;800&display=swap');
+
+:root {
+  --bg-dark: #121212;
+  --bg-card: #1a1a1a;
+  --primary-red: #d30000;
+  --text-white: #e5e5e5;
+  --text-muted: #b0b0b0;
+  --font-metal: 'Fugaz One', impact, sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  /* Efecto sutil de ruido analógico/fanzine de fondo */
+  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-metal);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Scrollbar personalizado estilo metalero */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-red);
+  border-radius: 4px;
+}

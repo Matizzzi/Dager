@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Glitch&display=swap');
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Capa de fondo con imagen */
+.bgLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  filter: brightness(0.7) contrast(1.2);
+}
+
+/* Overlay de asfalto */
+.asphaltOverlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    120deg,
+    rgba(0,0,0,0.6) 0px,
+    rgba(0,0,0,0.6) 2px,
+    rgba(30,30,30,0.3) 2px,
+    rgba(30,30,30,0.3) 8px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* Marcas de neumático quemado */
+.burnMark {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.9) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Contenedor del contenido */
+.container {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 1200px;
+  padding: 2rem;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  border-top: 2px solid #ff3300;
+  border-bottom: 2px solid #ff3300;
+  box-shadow: 0 0 50px rgba(255,51,0,0.3);
+  margin: 2rem;
+  border-radius: 4px;
+}
+
+/* Cinta superior */
+.topTape {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #ff3300;
+  padding: 0.3rem 1.5rem;
+  font-family: monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  border: 1px solid #ff3300;
+  border-radius: 30px;
+  display: flex;
+  gap: 2rem;
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Logo estilo cuchilla */
+.logo {
+  font-family: 'Rubik Glitch', 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 15vw, 8rem);
+  color: #fff;
+  text-shadow: 6px 6px 0px #990000, 12px 12px 0px rgba(0,0,0,0.5);
+  letter-spacing: 6px;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0%, 100% { transform: skew(0deg); text-shadow: 6px 6px 0px #990000; }
+  95% { transform: skew(0deg); }
+  96% { transform: skew(3deg); text-shadow: -3px 3px 0px #ff3300; }
+  97% { transform: skew(-3deg); text-shadow: 3px -3px 0px #ff3300; }
+}
+
+.knifeSlice {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #ff3300, #ff3300, transparent);
+  filter: blur(1px);
+}
+
+/* Tagline */
+.tagline {
+  font-family: monospace;
+  font-weight: bold;
+  font-size: clamp(1rem, 4vw, 1.6rem);
+  color: #ffaa80;
+  background: rgba(0,0,0,0.6);
+  display: inline-block;
+  padding: 0.4rem 1.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid #ff3300;
+  border-right: 4px solid #ff3300;
+  letter-spacing: 4px;
+}
+
+/* Botón cassette */
+.buttonWrapper {
+  margin: 2rem 0;
+}
+
+.cassetteButton {
+  background: #1a1a1a;
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 8px 8px 0px #550000;
+  transition: all 0.1s linear;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.cassetteButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,80,40,0.4), transparent);
+  transition: left 0.5s;
+}
+
+.cassetteButton:hover::before {
+  left: 100%;
+}
+
+.cassetteButton:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 12px 12px 0px #550000;
+}
+
+.buttonTape {
+  width: 40px;
+  height: 20px;
+  background: repeating-linear-gradient(90deg, #ff3300, #ff3300 4px, #222 4px, #222 8px);
+  display: inline-block;
+}
+
+.buttonIcon {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Velocímetro */
+.speedometer {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: monospace;
+  color: #ff3300;
+}
+
+.needle {
+  width: 3px;
+  height: 20px;
+  background: #ff3300;
+  transform-origin: bottom center;
+  animation: shake 0.2s infinite alternate;
+  box-shadow: 0 0 4px red;
+}
+
+@keyframes shake {
+  from { transform: rotate(-5deg); }
+  to { transform: rotate(5deg); }
+}
+
+.speedText {
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Chispas */
+.sparks {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #ffaa00;
+  border-radius: 50%;
+  bottom: 0;
+  animation: sparkFall 1.5s linear infinite;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+
+@keyframes sparkFall {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+}
