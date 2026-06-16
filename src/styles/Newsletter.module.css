@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Russo+One&family=Inter:wght@400;700&display=swap');
+
+.wrapper {
+  position: relative;
+  background-color: #050505;
+  padding: 8rem 2rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* --- CINTAS DE ADVERTENCIA ESTILO UNDERGROUND --- */
+.warningTapeTop, .warningTapeBottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: repeating-linear-gradient(
+    45deg,
+    #d30000,
+    #d30000 20px,
+    #111 20px,
+    #111 40px
+  );
+  z-index: 10;
+}
+
+.warningTapeTop { top: 0; }
+.warningTapeBottom { bottom: 0; }
+
+/* Textura de fondo sutil */
+.wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.02) 2px, transparent 0);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  z-index: 2;
+  background-color: #0d0d0d;
+  padding: 3rem 2rem;
+  border: 2px solid #222;
+  box-shadow: 12px 12px 0px rgba(0,0,0,0.8);
+}
+
+.title {
+  font-family: 'Fugaz One', impact, sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #ffffff;
+  text-shadow: 3px 3px 0px #d30000;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  color: #b0b0b0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- FORMULARIO --- */
+.formGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.inputContainer {
+  flex: 1 1 300px;
+  position: relative;
+}
+
+.inputField {
+  width: 100%;
+  background-color: #151515;
+  border: 2px solid #333;
+  color: #ffffff;
+  padding: 1.2rem 1.5rem;
+  font-family: 'Russo One', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.inputField::placeholder {
+  color: #555;
+}
+
+.inputField:focus {
+  border-color: #d30000;
+  box-shadow: 0 0 15px rgba(211, 0, 0, 0.2);
+  background-color: #000;
+}
+
+/* --- BOTÓN AÑADIDO AL ESTILO DE LA PÁGINA --- */
+.submitBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  display: inline-block;
+  flex: 0 1 auto;
+}
+
+.btnContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #d30000;
+  color: #ffffff;
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.1rem;
+  padding: 1.2rem 2.5rem;
+  letter-spacing: 1px;
+  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* Sombra negra detrás del botón cortado */
+.submitBtn::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+
+.submitBtn:hover .btnContent {
+  transform: translate(-2px, -2px);
+  background-color: #ff1a1a;
+}
+
+.submitBtn:hover::after {
+  transform: translate(4px, 4px);
+}
+
+.submitBtn:active .btnContent {
+  transform: translate(2px, 2px);
+}
+
+.submitBtn:active::after {
+  transform: translate(-2px, -2px);
+}

@@ -1,119 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Russo+One&display=swap');
+
 .wrapper {
-  padding: 6rem 2rem;
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
+  position: relative;
+  padding: 8rem 2rem;
+  background-color: #080808; /* Conecta suavemente con el #050505 del Hero */
+  border-top: 2px solid #222;
+  overflow: hidden;
+}
+
+/* Textura sutil para que no sea un fondo plano */
+.grungeOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at right, rgba(211, 0, 0, 0.03) 0%, transparent 50%),
+              repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
+  pointer-events: none;
 }
 
 .grid {
+  position: relative;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem;
+  gap: 5rem;
+  z-index: 2;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 850px) {
   .grid {
     grid-template-columns: 1fr 1fr;
     align-items: center;
   }
 }
 
+/* --- BLOQUE DE TEXTO --- */
 .textBlock {
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.tapeDeco {
+  width: 60px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  top: -30px;
+  left: -10px;
+  transform: rotate(-3deg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .title {
-  font-size: 2.5rem;
+  font-family: 'Fugaz One', impact, sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   margin-bottom: 1.5rem;
-  border-left: 6px solid var(--primary-red);
-  padding-left: 1rem;
-  color: var(--text-white);
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 3px 3px 0px #d30000;
+  line-height: 1.1;
 }
 
 .paragraph {
+  font-family: 'Inter', sans-serif;
   font-size: 1.15rem;
   line-height: 1.8;
-  color: var(--text-muted);
+  color: #b0b0b0;
+  border-left: 4px solid #d30000;
+  padding-left: 1.5rem;
+  background: linear-gradient(90deg, rgba(211, 0, 0, 0.05) 0%, transparent 100%);
 }
 
-.paragraph strong {
-  color: var(--text-white);
+.highlight {
+  color: #ffffff;
+  font-family: 'Russo One', sans-serif;
+  letter-spacing: 1px;
 }
 
-/* ESTILOS DEL REPRODUCTOR FALSO */
+/* --- REPRODUCTOR ESTILO ANALÓGICO / AMPLIFICADOR --- */
 .playerContainer {
-  background-color: var(--bg-card);
-  border: 2px solid #282828;
+  background-color: #111;
+  border: 2px solid #333;
+  border-top: 4px solid #444; /* Simula la luz sobre un equipo metálico */
   padding: 2rem;
-  box-shadow: 8px 8px 0px #000;
+  box-shadow: 12px 12px 0px rgba(0,0,0,0.8);
+  position: relative;
+  /* Patrón estilo rejilla de amplificador */
+  background-image: radial-gradient(rgba(0,0,0,0.4) 2px, transparent 0);
+  background-size: 8px 8px;
 }
 
 .playerHeader {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid #282828;
-  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 1rem;
+  background-color: #111; /* Oculta la rejilla detrás del texto */
 }
 
-.playerHeader h3 {
-  font-size: 1.2rem;
-  letter-spacing: 1px;
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.headerTitle h3 {
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.1rem;
+  color: #ffffff;
+  letter-spacing: 2px;
 }
 
 .redIcon {
-  color: var(--primary-red);
+  color: #d30000;
 }
 
+/* Simulación de LED rojo encendido */
+.ledIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ledLight {
+  width: 10px;
+  height: 10px;
+  background-color: #ff1a1a;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff1a1a, inset 0 0 2px #fff;
+  animation: pulseLed 2s infinite;
+}
+
+@keyframes pulseLed {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* --- LISTA DE PISTAS --- */
 .trackList {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background-color: #0a0a0a; /* Contenedor oscuro para las pistas */
+  padding: 0.5rem;
+  border: 1px solid #222;
 }
 
 .trackRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.85rem 0.75rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  transition: background-color 0.2s ease;
-  border-bottom: 1px solid #222;
+  padding: 1rem;
+  background-color: #151515;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  cursor: pointer;
 }
 
 .trackRow:hover {
-  background-color: rgba(211, 0, 0, 0.1);
-  border-bottom-color: var(--primary-red);
+  background-color: #1f0505;
+  border-left-color: #d30000;
+  transform: translateX(4px);
 }
 
 .trackInfo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
-.discIcon {
-  color: var(--text-muted);
+.playBtn {
+  color: #555;
+  transition: color 0.2s ease;
 }
 
-.trackRow:hover .discIcon {
-  color: var(--primary-red);
-  animation: spin 3s linear infinite;
+.trackRow:hover .playBtn {
+  color: #d30000;
 }
 
 .trackTitle {
-  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--text-white);
+  color: #e5e5e5;
+  letter-spacing: 0.5px;
+}
+
+.trackRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .trackDuration {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-family: monospace;
+  font-size: 0.95rem;
+  color: #888;
 }
 
-@keyframes spin {
+.discIcon {
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.trackRow:hover .discIcon {
+  color: #d30000;
+  animation: spinRecord 2s linear infinite;
+}
+
+@keyframes spinRecord {
   100% { transform: rotate(360deg); }
 }

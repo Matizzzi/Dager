@@ -1,64 +1,54 @@
-﻿import { useState } from 'react';
-import { Mail } from 'lucide-react';
+﻿import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, Zap } from 'lucide-react';
+import styles from '../styles/Newsletter.module.css';
 
 function Newsletter() {
   const [email, setEmail] = useState('');
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    alert('Te has unido al club callejero de D.A.G.E.R.! Pronto recibiras noticias.');
+    alert('¡Te has unido al club callejero de D.A.G.E.R.! Pronto recibirás noticias de destrucción masiva.');
     setEmail('');
   };
 
   return (
-    <section style={{
-      padding: '4rem 2rem',
-      textAlign: 'center',
-      backgroundColor: '#111',
-      borderTop: '1px solid #d30000',
-      borderBottom: '1px solid #d30000'
-    }}>
-      <h2 style={{ fontSize: '2rem', color: '#d30000' }}>Unete al Club Callejero</h2>
-      <p style={{ color: '#b0b0b0', marginTop: '0.5rem', marginBottom: '2rem' }}>
-        Recibe material inedito, alertas de merch y preventas exclusivas directo en tu correo.
-      </p>
-      <form onSubmit={handleSubscribe} style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: '1rem',
-        maxWidth: '500px',
-        margin: '0 auto'
-      }}>
-        <input
-          type="email"
-          placeholder="Tu Email de Metalero..."
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{
-            flex: '1',
-            padding: '0.75rem 1rem',
-            backgroundColor: '#222',
-            border: '1px solid #444',
-            color: 'white',
-            fontSize: '1rem'
-          }}
-        />
-        <button type="submit" style={{
-          backgroundColor: '#d30000',
-          border: 'none',
-          color: 'white',
-          padding: '0.75rem 1.5rem',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          cursor: 'pointer',
-          boxShadow: '5px 5px 0px #000'
-        }}>
-          <Mail size={16} /> UNIRME
-        </button>
-      </form>
+    <section className={styles.wrapper}>
+      {/* Cintas de peligro superior e inferior */}
+      <div className={styles.warningTapeTop}></div>
+      <div className={styles.warningTapeBottom}></div>
+
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5 }}
+        className={styles.container}
+      >
+        <h2 className={styles.title}>ÚNETE AL CLUB CALLEJERO</h2>
+        <p className={styles.subtitle}>
+          Recibe material inédito, alertas de merch y preventas exclusivas directo en tu correo. Sin spam corporativo, solo puro Speed Rock 'N' Roll.
+        </p>
+
+        <form onSubmit={handleSubscribe} className={styles.formGroup}>
+          <div className={styles.inputContainer}>
+            <input
+              type="email"
+              placeholder="Tu Email de Metalero..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className={styles.inputField}
+            />
+          </div>
+          
+          <button type="submit" className={styles.submitBtn}>
+            <span className={styles.btnContent}>
+              <Mail size={18} /> UNIRME <Zap size={18} />
+            </span>
+          </button>
+        </form>
+      </motion.div>
     </section>
   );
 }

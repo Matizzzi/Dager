@@ -1,65 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Russo+One&family=Inter:wght@400;700&display=swap');
+
 .blackoutBg {
-  background-color: #0d0d0d;
+  background-color: #080808;
   width: 100%;
-}
-
-.wrapper {
-  padding: 6rem 2rem;
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.sectionTitle {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  border-left: 6px solid var(--primary-red);
-  padding-left: 1rem;
-  color: var(--text-white);
-}
-
-/* CAJA DE ESTADO VACÍO (ESTILO FLYER) */
-.emptyState {
-  border: 3px dashed #333;
-  padding: 4rem 2rem;
-  text-align: center;
+  border-top: 1px solid #1a1a1a;
   position: relative;
-  background-color: var(--bg-dark);
   overflow: hidden;
 }
 
-.alertIcon {
-  color: var(--primary-red);
-  margin-bottom: 1.5rem;
+/* Textura sutil de muro callejero */
+.blackoutBg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#333 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.1;
+  pointer-events: none;
 }
 
-.statusTitle {
-  font-size: 1.5rem;
-  letter-spacing: 2px;
-  color: var(--text-white);
-  margin-bottom: 1rem;
-}
-
-.statusText {
-  max-width: 600px;
+.wrapper {
+  padding: 8rem 2rem;
+  max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
-  color: var(--text-muted);
-  line-height: 1.6;
-  font-size: 1.05rem;
   position: relative;
   z-index: 2;
 }
 
-/* Detalle visual de fondo como marca de agua urbana */
+.sectionTitle {
+  font-family: 'Fugaz One', impact, sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 4rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-shadow: 3px 3px 0px #d30000;
+  text-transform: uppercase;
+}
+
+.titleIcon {
+  color: #d30000;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+@media (min-width: 850px) {
+  .contentGrid {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+  }
+}
+
+/* --- CAJA DE ESTADO VACÍO (IZQUIERDA) --- */
+.emptyState {
+  border: 2px solid #222;
+  border-left: 6px solid #d30000;
+  padding: 4rem 2.5rem;
+  position: relative;
+  background-color: #0d0d0d;
+  overflow: hidden;
+  box-shadow: 12px 12px 0px rgba(0,0,0,0.9);
+}
+
+.alertIcon {
+  color: #d30000;
+  margin-bottom: 1.5rem;
+  animation: pulseWarning 2s infinite;
+}
+
+@keyframes pulseWarning {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+}
+
+.statusTitle {
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.statusText {
+  max-width: 600px;
+  color: #a0a0a0;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 2;
+  font-family: 'Inter', sans-serif;
+}
+
 .stencilText {
   position: absolute;
-  bottom: -10px;
+  bottom: -20px;
   right: -10px;
-  font-family: var(--font-metal);
-  font-size: clamp(3rem, 10vw, 6rem);
-  color: rgba(255, 255, 255, 0.015);
+  font-family: 'Fugaz One', sans-serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  color: rgba(255, 255, 255, 0.025);
   text-transform: uppercase;
   transform: rotate(-3deg);
   user-select: none;
   pointer-events: none;
+}
+
+/* --- EVIDENCIA DE EVENTO (DERECHA) --- */
+.pastGig {
+  position: relative;
+  background-color: #050505;
+  padding: 10px;
+  box-shadow: 15px 15px 25px rgba(0,0,0,0.8);
+  border: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.pastGigTag {
+  position: absolute;
+  top: -15px;
+  left: -20px;
+  background-color: #d30000;
+  color: #fff;
+  font-family: 'Russo One', sans-serif;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transform: rotate(-8deg);
+  box-shadow: 4px 4px 0px #000;
+  z-index: 5;
+}
+
+.flyerImage {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  /* Un filtro ligero para que encaje mejor con los negros y rojos */
+  filter: contrast(1.1) brightness(0.9);
+  border: 2px solid #111;
+  display: block;
+}
+
+/* Cintas adhesivas estilo fanzine */
+.tapeTop, .tapeBottom {
+  position: absolute;
+  width: 120px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  z-index: 4;
+}
+
+.tapeTop {
+  top: -12px;
+  right: 10%;
+  transform: rotate(6deg);
+}
+
+.tapeBottom {
+  bottom: -12px;
+  left: 10%;
+  transform: rotate(-4deg);
 }

@@ -1,46 +1,64 @@
-import { Volume2, Disc } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Volume2, Activity } from 'lucide-react';
 import styles from '../styles/Manifiesto.module.css';
 
 function Manifiesto() {
-  // Lista de canciones obtenida directamente de tus datos populares de Spotify
-  const tracks = [
-    { id: 1, title: "Evil Speed Rock 'N' Roll", duration: "4:53" },
-    { id: 2, title: "Strangers", duration: "4:58" },
-    { id: 3, title: "Out of love - Demo version", duration: "5:11" },
-    { id: 4, title: "Wild Child", duration: "5:00" }
-  ];
-
   return (
     <section className={styles.wrapper}>
+      {/* Patrón de fondo sutil para conectar con el Hero */}
+      <div className={styles.grungeOverlay}></div>
+
       <div className={styles.grid}>
         
-        {/* Texto de actitud de la banda */}
-        <div className={styles.textBlock}>
-          <h2 className={styles.title}>Declaración de Ruido</h2>
+        {/* BLOQUE DE TEXTO CON ANIMACIÓN DE ENTRADA */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className={styles.textBlock}
+        >
+          <div className={styles.tapeDeco}></div>
+          <h2 className={styles.title}>DECLARACIÓN DE RUIDO</h2>
           <p className={styles.paragraph}>
-            Guitarras afiladas, tachas, cuero y velocidad analógica pura[cite: 69]. Nacidos en las entrañas de la escena underground chilena, <strong>D.A.G.E.R.</strong> rescata el espíritu más violento y crudo de la Nueva Ola de Heavy Metal Tradicional (NWOTHM)[cite: 37, 39, 69]. No hacemos prisioneros.
+            Guitarras afiladas, tachas, cuero y velocidad analógica pura. Nacidos en las entrañas de la escena underground chilena, <strong className={styles.highlight}>D.A.G.E.R.</strong> rescata el espíritu más violento y crudo de la Nueva Ola de Heavy Metal Tradicional (NWOTHM). No hacemos prisioneros.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Panel del Reproductor */}
-        <div className={styles.playerContainer}>
+        {/* PANEL DEL REPRODUCTOR CON SPOTIFY INTEGRADO */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className={styles.playerContainer}
+        >
           <div className={styles.playerHeader}>
-            <Volume2 size={20} className={styles.redIcon} />
-            <h3>Singles Populares</h3>
+            <div className={styles.headerTitle}>
+              <Volume2 size={20} className={styles.redIcon} />
+              <h3>TAPE DECK // SINGLE DESTACADO</h3>
+            </div>
+            {/* LED de actividad parpadeante */}
+            <div className={styles.ledIndicator}>
+              <Activity size={16} color="#d30000" />
+              <span className={styles.ledLight}></span>
+            </div>
           </div>
           
-          <div className={styles.trackList}>
-            {tracks.map((track) => (
-              <div key={track.id} className={styles.trackRow}>
-                <div className={styles.trackInfo}>
-                  <Disc size={16} className={styles.discIcon} />
-                  <span className={styles.trackTitle}>{track.title}</span>
-                </div>
-                <span className={styles.trackDuration}>{track.duration}</span>
-              </div>
-            ))}
+          <div style={{ marginTop: '1rem' }}>
+            <iframe 
+              style={{ borderRadius: '12px' }} 
+              src="https://open.spotify.com/embed/track/4p4zw3bbVjDptDk9sqCyhC?utm_source=generator" 
+              width="100%" 
+              height="152" 
+              frameBorder="0" 
+              allowFullScreen="" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              loading="lazy"
+            ></iframe>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

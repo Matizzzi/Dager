@@ -1,53 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Russo+One&family=Inter:wght@400;700&display=swap');
+
 .wrapper {
-  padding: 6rem 2rem;
-  max-width: 1100px;
-  width: 100%;
+  position: relative;
+  padding: 6rem 2rem 8rem 2rem;
+  max-width: 100%;
   margin: 0 auto;
-  border-top: 1px solid #222;
+  background-color: #050505; /* Fondo ultra oscuro */
+}
+
+/* Borde superior rasgado / de advertencia */
+.topBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: repeating-linear-gradient(
+    45deg,
+    #d30000,
+    #d30000 15px,
+    #050505 15px,
+    #050505 30px
+  );
 }
 
 .sectionTitle {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  border-left: 6px solid var(--primary-red);
-  padding-left: 1rem;
-  color: var(--text-white);
+  font-family: 'Fugaz One', impact, sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 4rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-shadow: 3px 3px 0px #d30000;
+  text-transform: uppercase;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.titleIcon {
+  color: #d30000;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 850px) {
   .grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.2fr;
     align-items: center;
   }
 }
 
-/* EFECTO PORTADA ANALÓGICA */
+/* --- EFECTO PORTADA OCHENTERA --- */
 .coverContainer {
   display: flex;
   justify-content: center;
 }
 
 .vinylBorder {
-  background-color: #000;
-  padding: 12px;
-  box-shadow: 10px 10px 0px var(--primary-red);
-  border: 2px solid #333;
+  background-color: #0a0a0a;
+  padding: 15px;
+  box-shadow: 12px 12px 0px #d30000, 16px 16px 0px #000;
+  border: 2px solid #222;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.vinylBorder:hover {
+  transform: rotate(0deg) scale(1.02);
 }
 
 .epCover {
   position: relative;
   width: 100%;
   aspect-ratio: 1/1;
-  background: linear-gradient(135deg, #151515 0%, #3a0000 100%);
-  border: 3px solid var(--text-white);
+  background: radial-gradient(circle at center, #800000 0%, #1a0000 100%);
+  border: 4px solid #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,102 +94,201 @@
   padding: 1rem;
 }
 
-.coverTitle {
-  font-family: var(--font-metal);
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  text-align: center;
-  color: var(--text-white);
-  z-index: 2;
-  text-shadow: 2px 2px 0px #000;
+.grungeTexture {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+  z-index: 1;
+  mix-blend-mode: overlay;
+  pointer-events: none;
 }
 
 .coverSubtitle {
-  font-family: var(--font-metal);
-  font-size: 1.2rem;
-  color: var(--primary-red);
-  margin-top: 0.5rem;
-  z-index: 2;
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.5rem;
+  color: #fff;
+  z-index: 3;
+  margin-bottom: 0.5rem;
+  letter-spacing: 4px;
+}
+
+.coverTitle {
+  font-family: 'Fugaz One', impact, sans-serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1.1;
+  text-align: center;
+  color: #d30000;
+  z-index: 3;
+  text-shadow: 2px 2px 0px #fff, 4px 4px 0px #000;
+  transform: skewX(-5deg);
 }
 
 .vinylExplosion {
   position: absolute;
-  width: 150%;
-  height: 150%;
-  background: radial-gradient(circle, rgba(211,0,0,0.3) 0%, transparent 60%);
-  top: -25%;
-  left: -25%;
-  z-index: 1;
+  width: 200%;
+  height: 200%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(211, 0, 0, 0.2) 0deg 15deg,
+    transparent 15deg 30deg
+  );
+  top: -50%;
+  left: -50%;
+  z-index: 2;
   pointer-events: none;
+  animation: spinSlow 30s linear infinite;
 }
 
-/* BLOQUE DE INFORMACIÓN */
+@keyframes spinSlow {
+  100% { transform: rotate(360deg); }
+}
+
+/* --- BLOQUE DE INFORMACIÓN --- */
 .infoBlock {
   display: flex;
   flex-direction: column;
 }
 
 .epTitle {
-  font-size: 2rem;
-  color: var(--text-white);
-  margin-bottom: 0.25rem;
+  font-family: 'Russo One', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.epTag {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  color: #d30000;
+  font-weight: 900;
 }
 
 .releaseYear {
-  font-size: 0.9rem;
-  color: var(--primary-red);
-  font-family: var(--font-metal);
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  font-family: monospace;
+  font-size: 1rem;
+  color: #a0a0a0;
+  background-color: #111;
+  padding: 0.25rem 0.75rem;
+  border-left: 3px solid #d30000;
+  display: inline-block;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
 }
 
 .description {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--text-muted);
-  margin-bottom: 2.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #888;
+  margin-bottom: 3rem;
+  background: linear-gradient(90deg, rgba(211,0,0,0.03) 0%, transparent 100%);
+  padding: 1rem;
+  border-left: 2px dashed #333;
 }
 
-.description strong {
-  color: var(--text-white);
+.whiteText {
+  color: #ffffff;
+  font-family: 'Russo One', sans-serif;
+  font-weight: normal;
 }
 
-/* BOTONES DE PLATAFORMA */
+.redText {
+  color: #d30000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* --- BOTONES CON CORTES DIAGONALES --- */
 .buttonGroup {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
 }
 
-.btnSpotify {
-  background-color: #1db954;
-  color: #000;
+.slantedButton {
+  background-color: transparent;
   border: none;
-  padding: 1rem 2rem;
-  font-family: var(--font-metal);
-  font-size: 1rem;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 5px 5px 0px #000;
+  position: relative;
+  outline: none;
+  display: inline-block;
 }
 
-.btnBandcamp {
-  background-color: #1da1f2; /* Emulando un tono cyan o el color oscuro por defecto */
-  background: #1f2937;
-  color: var(--text-white);
-  border: 2px solid #444;
-  padding: 1rem 2rem;
-  font-family: var(--font-metal);
-  font-size: 1rem;
-  cursor: pointer;
-  display: inline-flex;
+.btnContent {
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  box-shadow: 5px 5px 0px #000;
+  gap: 0.75rem;
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+  letter-spacing: 1px;
+  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
 }
 
-.btnSpotify:active, .btnBandcamp:active {
-  transform: translate(3px, 3px);
-  box-shadow: 2px 2px 0px #000;
+/* Sombra detrás del botón cortado */
+.slantedButton::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+
+/* Variante Spotify (Verde ácido oscuro) */
+.spotifyBtn .btnContent {
+  background-color: #1db954;
+  color: #000000;
+}
+.spotifyBtn::after {
+  background-color: #0a0a0a;
+  border: 1px solid #1db954;
+}
+.spotifyBtn:hover .btnContent {
+  background-color: #1ed760;
+  transform: translate(-2px, -2px);
+}
+
+/* Variante Bandcamp (Gris plomo / Cian) */
+.bandcampBtn .btnContent {
+  background-color: #222;
+  border: 1px solid #444;
+}
+.bandcampBtn::after {
+  background-color: #d30000;
+}
+.bandcampBtn:hover .btnContent {
+  background-color: #333;
+  transform: translate(-2px, -2px);
+}
+
+.slantedButton:hover::after {
+  transform: translate(4px, 4px);
+}
+
+.slantedButton:active .btnContent {
+  transform: translate(2px, 2px);
+}
+
+.slantedButton:active::after {
+  transform: translate(-2px, -2px);
+}
+
+.spinHover {
+  transition: transform 0.5s ease;
+}
+
+.spotifyBtn:hover .spinHover {
+  transform: rotate(180deg);
 }
