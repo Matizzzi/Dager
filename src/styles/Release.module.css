@@ -1,50 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Russo+One&family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
+
+/* ============================================================
+   DAGER — RELEASE
+   Último lanzamiento + teaser del próximo single
+   ============================================================ */
 
 .wrapper {
   position: relative;
-  padding: 6rem 2rem 8rem 2rem;
-  max-width: 100%;
-  margin: 0 auto;
-  background-color: #050505; /* Fondo ultra oscuro */
+  padding: 0 2rem 9rem;
+  background-color: #080808;
+  overflow: hidden;
 }
 
-/* Borde superior rasgado / de advertencia */
+/* Borde superior — cinta de peligro diagonal, misma paleta */
 .topBorder {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 6px;
+  height: 5px;
   background: repeating-linear-gradient(
-    45deg,
-    #d30000,
-    #d30000 15px,
-    #050505 15px,
-    #050505 30px
+    -60deg,
+    #C8000A,
+    #C8000A 14px,
+    #080808 14px,
+    #080808 28px
   );
+  margin-bottom: 7rem;
+}
+
+/* Textura diagonal de fondo — igual que Manifiesto */
+.wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 3px,
+    rgba(255,255,255,0.006) 3px,
+    rgba(255,255,255,0.006) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── TÍTULO DE SECCIÓN ───────────────────────────────────── */
+.sectionHeader {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto 4.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.sectionNumber {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #C8000A;
+  white-space: nowrap;
+}
+
+.sectionLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, #C8000A, #222);
+  opacity: 0.5;
 }
 
 .sectionTitle {
-  font-family: 'Fugaz One', impact, sans-serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  margin-bottom: 4rem;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  text-shadow: 3px 3px 0px #d30000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  letter-spacing: 5px;
   text-transform: uppercase;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
+  color: #E8E2D9;
+  text-shadow: 3px 3px 0px #C8000A, 6px 6px 0px #000;
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .titleIcon {
-  color: #d30000;
+  color: #C8000A;
+  flex-shrink: 0;
 }
 
+/* ── GRID PRINCIPAL ─────────────────────────────────────── */
 .grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr;
   gap: 4rem;
@@ -54,241 +99,475 @@
 
 @media (min-width: 850px) {
   .grid {
-    grid-template-columns: 1fr 1.2fr;
-    align-items: center;
+    grid-template-columns: 1fr 1.25fr;
+    align-items: start;
   }
 }
 
-/* --- EFECTO PORTADA OCHENTERA --- */
+/* ── PORTADA EP ─────────────────────────────────────────── */
 .coverContainer {
   display: flex;
   justify-content: center;
 }
 
+/*
+  Marco de vinilo: sombra sólida roja desplazada —
+  mismo truco que el botón cuchilla del Hero
+*/
 .vinylBorder {
   background-color: #0a0a0a;
-  padding: 15px;
-  box-shadow: 12px 12px 0px #d30000, 16px 16px 0px #000;
-  border: 2px solid #222;
+  padding: 12px;
+  border: 1px solid #222;
+  border-top: 3px solid #333;
+  box-shadow:
+    10px 10px 0px #C8000A,
+    16px 16px 0px #000;
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   transform: rotate(-2deg);
-  transition: transform 0.3s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+}
+
+/* Esquina de corte — mismo lenguaje del Hero */
+.vinylBorder::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent #080808 transparent transparent;
+  z-index: 5;
 }
 
 .vinylBorder:hover {
   transform: rotate(0deg) scale(1.02);
+  box-shadow: 6px 6px 0px #C8000A, 10px 10px 0px #000;
 }
 
 .epCover {
   position: relative;
   width: 100%;
-  aspect-ratio: 1/1;
-  background: radial-gradient(circle at center, #800000 0%, #1a0000 100%);
-  border: 4px solid #fff;
+  aspect-ratio: 1 / 1;
+  /* Degradado radial sangre: centro más claro, bordes abismo */
+  background: radial-gradient(circle at 40% 40%, #6a0000 0%, #1a0000 55%, #080808 100%);
+  border: 3px solid #E8E2D9;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
+/* Textura SVG de ruido sobre la portada */
 .grungeTexture {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
   z-index: 1;
   mix-blend-mode: overlay;
   pointer-events: none;
 }
 
-.coverSubtitle {
-  font-family: 'Russo One', sans-serif;
-  font-size: 1.5rem;
-  color: #fff;
-  z-index: 3;
-  margin-bottom: 0.5rem;
-  letter-spacing: 4px;
-}
-
-.coverTitle {
-  font-family: 'Fugaz One', impact, sans-serif;
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  line-height: 1.1;
-  text-align: center;
-  color: #d30000;
-  z-index: 3;
-  text-shadow: 2px 2px 0px #fff, 4px 4px 0px #000;
-  transform: skewX(-5deg);
-}
-
+/* Explosión cónica giratoria — centro de la portada */
 .vinylExplosion {
   position: absolute;
-  width: 200%;
-  height: 200%;
+  width: 220%;
+  height: 220%;
   background: repeating-conic-gradient(
     from 0deg,
-    rgba(211, 0, 0, 0.2) 0deg 15deg,
-    transparent 15deg 30deg
+    rgba(200, 0, 10, 0.15) 0deg 12deg,
+    transparent 12deg 24deg
   );
-  top: -50%;
-  left: -50%;
+  top: -60%;
+  left: -60%;
   z-index: 2;
   pointer-events: none;
-  animation: spinSlow 30s linear infinite;
+  animation: spinSlow 40s linear infinite;
 }
 
 @keyframes spinSlow {
-  100% { transform: rotate(360deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* --- BLOQUE DE INFORMACIÓN --- */
+.coverSubtitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: #E8E2D9;
+  z-index: 3;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.coverTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 7vw, 3.8rem);
+  line-height: 0.95;
+  text-align: center;
+  letter-spacing: 3px;
+  color: #C8000A;
+  z-index: 3;
+  text-shadow: 2px 2px 0px #E8E2D9, 4px 4px 0px #000;
+  transform: skewX(-4deg);
+}
+
+/* ── BLOQUE DE INFORMACIÓN ──────────────────────────────── */
 .infoBlock {
   display: flex;
   flex-direction: column;
 }
 
 .epTitle {
-  font-family: 'Russo One', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  color: #ffffff;
-  margin-bottom: 0.5rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  letter-spacing: 4px;
+  color: #E8E2D9;
+  margin: 0 0 0.5rem;
+  line-height: 1;
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  align-items: baseline;
+  gap: 0.75rem;
   flex-wrap: wrap;
 }
 
 .epTag {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.2rem;
-  color: #d30000;
-  font-weight: 900;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #C8000A;
+  border: 1px solid #C8000A;
+  padding: 0.1rem 0.5rem;
 }
 
 .releaseYear {
-  font-family: monospace;
-  font-size: 1rem;
-  color: #a0a0a0;
-  background-color: #111;
-  padding: 0.25rem 0.75rem;
-  border-left: 3px solid #d30000;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #444;
+  border-left: 3px solid #C8000A;
+  padding-left: 0.75rem;
   display: inline-block;
-  margin-bottom: 2rem;
-  letter-spacing: 1px;
+  margin-bottom: 1.8rem;
 }
 
 .description {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-size: 1.15rem;
-  line-height: 1.8;
-  color: #888;
-  margin-bottom: 3rem;
-  background: linear-gradient(90deg, rgba(211,0,0,0.03) 0%, transparent 100%);
-  padding: 1rem;
-  border-left: 2px dashed #333;
+  font-weight: 400;
+  line-height: 1.85;
+  color: #666;
+  margin-bottom: 2.5rem;
+  border-left: 3px solid #C8000A;
+  padding-left: 1.5rem;
+  background: linear-gradient(90deg, rgba(200,0,10,0.04) 0%, transparent 80%);
 }
 
 .whiteText {
-  color: #ffffff;
-  font-family: 'Russo One', sans-serif;
-  font-weight: normal;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #E8E2D9;
 }
 
 .redText {
-  color: #d30000;
+  color: #C8000A;
   font-style: italic;
-  font-weight: bold;
 }
 
-/* --- BOTONES CON CORTES DIAGONALES --- */
+/* ── BOTONES CUCHILLA ───────────────────────────────────── */
 .buttonGroup {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
+  margin-bottom: 2.5rem;
 }
 
-.slantedButton {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+.btnOuter {
   position: relative;
-  outline: none;
   display: inline-block;
 }
 
-.btnContent {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: 'Russo One', sans-serif;
-  font-size: 1.1rem;
-  padding: 1rem 2.5rem;
-  letter-spacing: 1px;
-  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
-  transition: all 0.2s ease;
-  position: relative;
-  z-index: 2;
-  color: #ffffff;
-}
-
-/* Sombra detrás del botón cortado */
-.slantedButton::after {
-  content: '';
+.btnShadow {
   position: absolute;
-  top: 6px;
-  left: 6px;
+  top: 5px;
+  left: 5px;
   width: 100%;
   height: 100%;
-  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  background: #000;
+  clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+  z-index: 0;
+}
+
+.btnContent {
+  position: relative;
   z-index: 1;
-  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 0.9rem 2.2rem;
+  clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+  transition: background 0.15s, transform 0.1s;
+  border: none;
+  cursor: pointer;
+  outline: none;
 }
 
-/* Variante Spotify (Verde ácido oscuro) */
-.spotifyBtn .btnContent {
-  background-color: #1db954;
-  color: #000000;
-}
-.spotifyBtn::after {
-  background-color: #0a0a0a;
-  border: 1px solid #1db954;
-}
-.spotifyBtn:hover .btnContent {
-  background-color: #1ed760;
+.btnContent:hover {
   transform: translate(-2px, -2px);
 }
 
-/* Variante Bandcamp (Gris plomo / Cian) */
-.bandcampBtn .btnContent {
-  background-color: #222;
-  border: 1px solid #444;
-}
-.bandcampBtn::after {
-  background-color: #d30000;
-}
-.bandcampBtn:hover .btnContent {
-  background-color: #333;
-  transform: translate(-2px, -2px);
+.btnContent:active {
+  transform: translate(1px, 1px);
 }
 
-.slantedButton:hover::after {
-  transform: translate(4px, 4px);
+.spotifyBtn {
+  background: #1DB954;
+  color: #000;
+}
+.spotifyBtn:hover {
+  background: #1ed760;
 }
 
-.slantedButton:active .btnContent {
-  transform: translate(2px, 2px);
+.bandcampBtn {
+  background: #1da0c3;
+  color: #000;
 }
-
-.slantedButton:active::after {
-  transform: translate(-2px, -2px);
+.bandcampBtn:hover {
+  background: #26b8de;
 }
 
 .spinHover {
   transition: transform 0.5s ease;
 }
-
-.spotifyBtn:hover .spinHover {
+.btnOuter:hover .spinHover {
   transform: rotate(180deg);
+}
+
+/* ── SPOTIFY EMBED ──────────────────────────────────────── */
+.spotifyWrap {
+  background: #080808;
+  border: 1px solid #1e1e1e;
+  border-top: 3px solid #333;
+  padding: 2px;
+  box-shadow: 8px 8px 0px #000;
+}
+
+.spotifyWrap iframe {
+  display: block;
+}
+
+/* ============================================================
+   TEASER DEL PRÓXIMO SINGLE
+   ============================================================ */
+.teaserSection {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 8rem auto 0;
+}
+
+/* Encabezado del teaser con badge PRÓXIMAMENTE */
+.teaserHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.teaserLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #C8000A;
+  border: 1px solid #C8000A;
+  padding: 0.4rem 1rem;
+  white-space: nowrap;
+}
+
+.teaserLabelDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C8000A;
+  animation: pulseLed 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseLed {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+.teaserTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  letter-spacing: 5px;
+  color: #E8E2D9;
+  margin: 0;
+  text-shadow: 3px 3px 0px #C8000A, 6px 6px 0px #000;
+}
+
+/* ── CONTENEDOR DE VIDEO ────────────────────────────────── */
+/*
+  Marco igual que el vinylBorder:
+  sombra sólida roja + esquina cortada
+*/
+.videoFrame {
+  position: relative;
+  background: #000;
+  border: 1px solid #222;
+  border-top: 3px solid #333;
+  box-shadow:
+    10px 10px 0px #C8000A,
+    16px 16px 0px #000;
+  overflow: hidden;
+  /* Esquina de corte superior-derecha */
+}
+
+.videoFrame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 24px 24px 0;
+  border-color: transparent #080808 transparent transparent;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Badge VHS dentro del frame */
+.vhsBadge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #E8E2D9;
+  background: rgba(0,0,0,0.75);
+  padding: 0.3rem 0.8rem;
+  border-left: 3px solid #C8000A;
+  pointer-events: none;
+}
+
+.vhsDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #C8000A;
+  box-shadow: 0 0 6px #C8000A;
+  animation: pulseLed 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.teaserVideo {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Scanlines VHS sobre el video */
+  position: relative;
+}
+
+/* Scanlines superpuestas al video */
+.videoScanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.12) 0px,
+    rgba(0,0,0,0.12) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* ── CAPTION DEL TEASER ─────────────────────────────────── */
+.teaserCaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  background: #0d0d0d;
+  border-top: 1px solid #1a1a1a;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.captionText {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.captionText span {
+  color: #555;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 849px) {
+  .wrapper {
+    padding: 0 1.5rem 7rem;
+  }
+
+  .sectionHeader {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .sectionTitle {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    white-space: normal;
+  }
+
+  .teaserSection {
+    margin-top: 5rem;
+  }
+
+  .teaserHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+/* ── MOTION REDUCIDA ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .vinylExplosion  { animation: none; }
+  .teaserLabelDot  { animation: none; }
+  .vhsDot          { animation: none; }
+  .spinHover       { transition: none; }
 }

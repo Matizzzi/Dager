@@ -1,22 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
+
+/* ============================================================
+   DAGER — MANIFIESTO
+   Conecta visualmente con el Hero: mismo lenguaje, distinto ritmo
+   ============================================================ */
 
 .wrapper {
   position: relative;
-  padding: 8rem 2rem;
-  background-color: #080808; /* Conecta suavemente con el #050505 del Hero */
-  border-top: 2px solid #222;
+  padding: 9rem 2rem;
+  background-color: #080808;
+  border-top: 1px solid #181818;
   overflow: hidden;
 }
 
-/* Textura sutil para que no sea un fondo plano */
+/* Textura de fondo: rejilla diagonal muy sutil + brillo lateral rojo */
 .grungeOverlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at right, rgba(211, 0, 0, 0.03) 0%, transparent 50%),
-              repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
+  background:
+    radial-gradient(ellipse at 80% 50%, rgba(200, 0, 10, 0.04) 0%, transparent 55%),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 255, 255, 0.008) 3px,
+      rgba(255, 255, 255, 0.008) 4px
+    );
   pointer-events: none;
+  z-index: 0;
 }
 
+/* Línea diagonal decorativa de fondo — como los rasguños de vinilo del Hero */
+.grungeOverlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, #181818 20%, #181818 80%, transparent);
+}
+
+/* ── GRID ───────────────────────────────────────────────── */
 .grid {
   position: relative;
   max-width: 1100px;
@@ -32,187 +57,229 @@
   .grid {
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    gap: 6rem;
   }
 }
 
-/* --- BLOQUE DE TEXTO --- */
+/* ── BLOQUE DE TEXTO ────────────────────────────────────── */
 .textBlock {
   display: flex;
   flex-direction: column;
-  position: relative;
+  gap: 0;
 }
 
-.tapeDeco {
-  width: 60px;
-  height: 20px;
-  background-color: rgba(255, 255, 255, 0.6);
-  position: absolute;
-  top: -30px;
-  left: -10px;
-  transform: rotate(-3deg);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+/* Número de sección — estilo tracklist */
+.sectionNumber {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 6px;
+  color: #C8000A;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
+.sectionNumber::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  max-width: 60px;
+  background: #C8000A;
+  opacity: 0.4;
+}
+
+/* Título con misma técnica de sombra sólida del Hero */
 .title {
-  font-family: 'Fugaz One', impact, sans-serif;
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  margin-bottom: 1.5rem;
-  color: #ffffff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 5.5vw, 4rem);
+  line-height: 1;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 3px 3px 0px #d30000;
-  line-height: 1.1;
+  color: #E8E2D9;
+  margin: 0 0 2rem;
+  /*
+    Sombra roja + negra — mismo lenguaje que el logo del Hero
+    pero más contenida para que no compita con él
+  */
+  text-shadow:
+    3px 3px 0px #C8000A,
+    6px 6px 0px #000;
 }
 
+/* Párrafo con borde rojo izquierdo */
 .paragraph {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-size: 1.15rem;
-  line-height: 1.8;
-  color: #b0b0b0;
-  border-left: 4px solid #d30000;
+  font-weight: 400;
+  line-height: 1.85;
+  color: #777;
+  border-left: 3px solid #C8000A;
   padding-left: 1.5rem;
-  background: linear-gradient(90deg, rgba(211, 0, 0, 0.05) 0%, transparent 100%);
+  /* Degradado sutil detrás del texto — como el brillo de un amplificador */
+  background: linear-gradient(90deg, rgba(200, 0, 10, 0.04) 0%, transparent 80%);
 }
 
 .highlight {
-  color: #ffffff;
-  font-family: 'Russo One', sans-serif;
-  letter-spacing: 1px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 3px;
+  color: #E8E2D9;
 }
 
-/* --- REPRODUCTOR ESTILO ANALÓGICO / AMPLIFICADOR --- */
+/* ── PANEL DEL REPRODUCTOR ─────────────────────────────── */
+/*
+  Estética: amplificador de válvulas + rejilla de tela
+  Color base oscuro con patrón de puntos, borde metálico
+*/
 .playerContainer {
-  background-color: #111;
-  border: 2px solid #333;
-  border-top: 4px solid #444; /* Simula la luz sobre un equipo metálico */
-  padding: 2rem;
-  box-shadow: 12px 12px 0px rgba(0,0,0,0.8);
   position: relative;
-  /* Patrón estilo rejilla de amplificador */
-  background-image: radial-gradient(rgba(0,0,0,0.4) 2px, transparent 0);
-  background-size: 8px 8px;
+  background-color: #0d0d0d;
+  /* Patrón rejilla de speaker/amplificador */
+  background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 6px 6px;
+  border: 1px solid #222;
+  border-top: 3px solid #333;
+  border-bottom: 3px solid #111;
+  box-shadow:
+    8px 8px 0px #000,
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 1.8rem;
 }
 
+/* Borde lateral rojo — como una franja de identificación de equipo */
+.playerContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, #C8000A, #5a0004);
+}
+
+/* Esquina de corte — sigue el clip-path del botón del Hero */
+.playerContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 18px 18px 0;
+  border-color: transparent #080808 transparent transparent;
+}
+
+/* ── HEADER DEL PLAYER ──────────────────────────────────── */
 .playerHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 1.2rem;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid #333;
-  padding-bottom: 1rem;
-  background-color: #111; /* Oculta la rejilla detrás del texto */
+  border-bottom: 1px solid #1e1e1e;
 }
 
 .headerTitle {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 10px;
 }
 
 .headerTitle h3 {
-  font-family: 'Russo One', sans-serif;
-  font-size: 1.1rem;
-  color: #ffffff;
-  letter-spacing: 2px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #555;
 }
 
 .redIcon {
-  color: #d30000;
+  color: #C8000A;
+  flex-shrink: 0;
 }
 
-/* Simulación de LED rojo encendido */
+/* Indicador LED + icono de actividad */
 .ledIndicator {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .ledLight {
-  width: 10px;
-  height: 10px;
-  background-color: #ff1a1a;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  box-shadow: 0 0 8px #ff1a1a, inset 0 0 2px #fff;
-  animation: pulseLed 2s infinite;
+  background: #ff1a1a;
+  box-shadow: 0 0 6px #ff1a1a;
+  animation: pulseLed 2s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
 @keyframes pulseLed {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%, 100% { opacity: 1;   box-shadow: 0 0 6px #ff1a1a; }
+  50%       { opacity: 0.3; box-shadow: 0 0 2px #ff1a1a; }
 }
 
-/* --- LISTA DE PISTAS --- */
-.trackList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  background-color: #0a0a0a; /* Contenedor oscuro para las pistas */
-  padding: 0.5rem;
-  border: 1px solid #222;
+/* ── SPOTIFY EMBED ──────────────────────────────────────── */
+/*
+  Wrapper que le da contexto visual al iframe:
+  fondo oscuro + borde sutil para que el iframe no flote
+*/
+.spotifyWrap {
+  background: #080808;
+  border: 1px solid #1e1e1e;
+  padding: 2px;
+  /* Spotify iframe ya tiene border-radius: dejamos que lo maneje él */
 }
 
-.trackRow {
+.spotifyWrap iframe {
+  display: block;
+}
+
+/* Pie del player: modelo/serial estilo equipo de audio */
+.playerFooter {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #151515;
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
-  cursor: pointer;
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #1a1a1a;
 }
 
-.trackRow:hover {
-  background-color: #1f0505;
-  border-left-color: #d30000;
-  transform: translateX(4px);
+.playerModel {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #252525;
 }
 
-.trackInfo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.playerSerial {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: #222;
 }
 
-.playBtn {
-  color: #555;
-  transition: color 0.2s ease;
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 849px) {
+  .wrapper {
+    padding: 6rem 1.5rem;
+  }
+
+  .playerContainer {
+    padding: 1.4rem;
+  }
 }
 
-.trackRow:hover .playBtn {
-  color: #d30000;
-}
-
-.trackTitle {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #e5e5e5;
-  letter-spacing: 0.5px;
-}
-
-.trackRight {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.trackDuration {
-  font-family: monospace;
-  font-size: 0.95rem;
-  color: #888;
-}
-
-.discIcon {
-  color: #333;
-  transition: all 0.3s ease;
-}
-
-.trackRow:hover .discIcon {
-  color: #d30000;
-  animation: spinRecord 2s linear infinite;
-}
-
-@keyframes spinRecord {
-  100% { transform: rotate(360deg); }
+/* ── MOTION REDUCIDA ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ledLight {
+    animation: none;
+    opacity: 1;
+  }
 }

@@ -1,5 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
 
+/* ============================================================
+   DAGER — HERO
+   Pure Evil Speed Rock 'n' Roll | Santiago Underground
+   ============================================================ */
+
+/* --- BASE --- */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -7,44 +13,71 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #050505;
+  background-color: #080808;
 }
 
-/* --- FONDOS Y TEXTURAS --- */
+/* --- FONDO: FOTO DE LA BANDA --- */
 .bgLayer {
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center 20%;
+  background-position: center 15%;
   background-repeat: no-repeat;
-  filter: grayscale(80%) contrast(1.2) brightness(0.3);
+  /* 
+    Efecto dual: desaturado + alto contraste para que la foto
+    se convierta en textura, no en protagonista.
+    El protagonista es el nombre.
+  */
+  filter: grayscale(100%) contrast(1.3) brightness(0.22);
   z-index: 1;
+  /* Fade sutil hacia abajo para que el strip inferior respire */
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
-/* Oscurece los bordes para centrar la atención */
+/* --- VIÑETA RADIAL --- */
 .vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 30%, #050505 100%);
+  background: radial-gradient(ellipse at 50% 40%, transparent 20%, #080808 80%);
   z-index: 2;
 }
 
-/* Líneas de TV analógica/VHS de los 80s */
+/* --- LÍNEAS DE TV ANALÓGICA / VHS --- */
 .scanlines {
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.20),
+    rgba(0, 0, 0, 0.20) 1px,
     transparent 1px,
-    transparent 2px
+    transparent 3px
   );
   pointer-events: none;
   z-index: 3;
 }
 
-/* --- CONTENEDOR CENTRAL --- */
+/* --- LÍNEAS DE VELOCIDAD DIAGONALES (SVG inline en JSX) --- */
+.speedLines {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* --- RUIDO DE CANVAS (manejado por JS) --- */
+.noiseCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.07;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
 .container {
   position: relative;
   z-index: 10;
@@ -57,160 +90,323 @@
   align-items: center;
 }
 
-/* Parche superior */
+/* --- ETIQUETA SUPERIOR — PARCHE DE MEZCLILLA --- */
 .patchLabel {
-  background-color: #111;
-  color: #b0b0b0;
-  font-family: 'Russo One', sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  padding: 0.5rem 1.5rem;
-  border: 2px solid #333;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  box-shadow: 4px 4px 0px rgba(211, 0, 0, 0.3);
-}
-
-/* --- LOGO METALERO --- */
-.logo {
-  font-family: 'Fugaz One', impact, sans-serif;
-  font-size: clamp(4rem, 12vw, 9rem);
-  line-height: 1;
-  margin: 0;
-  color: #ffffff;
-  /* Sombra sólida roja característica del Hard Rock */
-  text-shadow: 
-    6px 6px 0px #d30000, 
-    12px 12px 0px #000000;
+  gap: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 5px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  color: #555;
+  border-top: 1px solid #1e1e1e;
+  border-bottom: 1px solid #1e1e1e;
+  padding: 0.55rem 1.8rem;
+  margin-bottom: 2.5rem;
 }
 
-/* --- SUBTÍTULO --- */
-.tagline {
-  font-family: 'Russo One', sans-serif;
-  font-size: clamp(1.2rem, 3vw, 2rem);
-  color: #d30000;
-  background-color: #0a0a0a;
-  padding: 0.5rem 2rem;
-  margin-top: 1rem;
-  margin-bottom: 3rem;
-  display: inline-block;
-  border-bottom: 4px solid #d30000;
-  transform: skewX(-10deg); /* Inclinación de velocidad */
+.patchLabel .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #C8000A;
+  flex-shrink: 0;
 }
 
-/* --- BOTÓN DE ACCIÓN (ESTILO CUCHILLA) --- */
-.actionArea {
-  margin-top: 2rem;
-}
-
-.slantedButton {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+/* --- LOGO DAGER: EFECTO SERIGRAFIA DESALINEADA --- */
+/*
+  Técnica: tres capas del mismo texto superpuestas con
+  offsets distintos → simula impresión de merch con mal
+  registro de color. Característica de bandas reales.
+*/
+.logoWrap {
   position: relative;
-  outline: none;
   display: inline-block;
+  line-height: 1;
+  margin-bottom: 0.25rem;
 }
 
-.buttonContent {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background-color: #d30000;
-  color: #ffffff;
-  font-family: 'Russo One', sans-serif;
-  font-size: 1.2rem;
-  padding: 1.2rem 3rem;
-  letter-spacing: 1px;
-  /* Corte angular en las esquinas superior-izquierda e inferior-derecha */
-  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
-  transition: all 0.2s ease;
+/* Capa 1: desplazamiento dorado (registro roto) */
+.logoGhostGold {
+  position: absolute;
+  top: -3px;
+  left: -5px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5.5rem, 18vw, 10.5rem);
+  line-height: 1;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: #B8952A;
+  opacity: 0.20;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Capa 2: desplazamiento rojo sangre */
+.logoGhostRed {
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5.5rem, 18vw, 10.5rem);
+  line-height: 1;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: #C8000A;
+  opacity: 0.60;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Capa 3: texto principal — hueso blanco, encima de todo */
+.logoMain {
   position: relative;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5.5rem, 18vw, 10.5rem);
+  line-height: 1;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: #E8E2D9;
+  margin: 0;
   z-index: 2;
 }
 
-/* Sombra negra detrás del botón cortado */
-.slantedButton::after {
-  content: '';
+/* SVG de grieta que cruza el logo — va dentro de .logoWrap */
+.logoCrack {
   position: absolute;
-  top: 6px;
-  left: 6px;
+  inset: 0;
   width: 100%;
   height: 100%;
-  background-color: #000000;
-  clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  pointer-events: none;
+  z-index: 3;
+  overflow: visible;
+}
+
+/* --- SUBTÍTULO / TAGLINE --- */
+.tagline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.45rem);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #C8000A;
+  margin-top: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+/* --- DIVISOR CON ORNAMENTOS --- */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #2a2a2a);
+}
+
+.dividerLine.right {
+  background: linear-gradient(90deg, #2a2a2a, transparent);
+}
+
+.dividerOrnament {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 8px;
+  color: #2a2a2a;
+  flex-shrink: 0;
+}
+
+/* --- BOTÓN CUCHILLA --- */
+.btnContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.btnShadow {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  clip-path: polygon(18px 0%, 100% 0%, calc(100% - 18px) 100%, 0% 100%);
+  z-index: 0;
+}
+
+.bladeBtn {
+  position: relative;
   z-index: 1;
-  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #C8000A;
+  color: #E8E2D9;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 1.1rem 2.8rem;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(18px 0%, 100% 0%, calc(100% - 18px) 100%, 0% 100%);
+  transition: background 0.15s ease, transform 0.1s ease;
+  outline: none;
 }
 
-.slantedButton:hover .buttonContent {
+.bladeBtn:hover {
+  background: #E50010;
   transform: translate(-2px, -2px);
-  background-color: #ff1a1a;
 }
 
-.slantedButton:hover::after {
+.bladeBtn:hover + .btnShadow,
+.btnContainer:hover .btnShadow {
   transform: translate(4px, 4px);
 }
 
-.slantedButton:active .buttonContent {
-  transform: translate(2px, 2px);
+.bladeBtn:active {
+  transform: translate(1px, 1px);
 }
 
-.slantedButton:active::after {
-  transform: translate(-2px, -2px);
+.zapIcon {
+  animation: zapPulse 1.6s ease-in-out infinite;
 }
 
-.pulseIcon {
-  animation: heartbeat 1.5s infinite;
+@keyframes zapPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.25); }
 }
 
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.3); color: #000; }
-}
-
-/* --- DETALLE DEL FLYER (EVENTO) --- */
-.flyerDeco {
-  position: absolute;
-  bottom: 5%;
-  left: 5%;
-  width: 200px;
-  z-index: 15;
-  filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.8));
-  pointer-events: none; /* Para que no interfiera con clicks */
-}
-
-.flyerDeco img {
+/* --- STRIP DE INFO DEL SHOW (parte inferior) --- */
+.showStrip {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 3.5rem;
+  border-top: 1px solid #181818;
+  border-bottom: 1px solid #181818;
   width: 100%;
-  height: auto;
-  border: 4px solid #fff;
-  border-radius: 2px;
 }
 
-/* Simulador de cinta adhesiva */
-.tape {
+.showItem {
+  padding: 0.8rem 2rem;
+  border-right: 1px solid #181818;
+  text-align: center;
+  flex: 1 1 auto;
+}
+
+.showItem:last-child {
+  border-right: none;
+}
+
+.showItemLabel {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.showItemValue {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.showItemValue.accent {
+  color: #C8000A;
+}
+
+/* --- MARCA DE ESQUINA --- */
+.cornerMark {
   position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%) rotate(5deg);
-  width: 80px;
-  height: 25px;
-  background-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-  backdrop-filter: blur(2px);
+  bottom: 1.8rem;
+  right: 2rem;
+  z-index: 15;
+  text-align: right;
+  pointer-events: none;
 }
 
-/* Media Queries para móviles */
+.cornerMark span {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #1e1e1e;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 768px) {
-  .flyerDeco {
-    display: none; /* Ocultamos el flyer en móviles para no saturar */
+  .patchLabel {
+    font-size: 0.68rem;
+    letter-spacing: 3px;
+    padding: 0.5rem 1rem;
   }
-  .buttonContent {
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
+
+  .bladeBtn {
+    font-size: 0.95rem;
+    padding: 1rem 1.8rem;
+    letter-spacing: 2px;
+  }
+
+  .showItem {
+    padding: 0.7rem 1rem;
+  }
+
+  .showStrip {
+    margin-top: 2.5rem;
+  }
+
+  .cornerMark {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .showItem {
+    flex: 1 1 50%;
+    border-bottom: 1px solid #181818;
+  }
+
+  .showItem:nth-child(even) {
+    border-right: none;
+  }
+
+  .showItem:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+}
+
+/* ============================================================
+   MOTION REDUCIDA — respeta accesibilidad
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .zapIcon {
+    animation: none;
   }
 }
