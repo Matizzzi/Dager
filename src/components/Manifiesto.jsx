@@ -55,10 +55,18 @@ function Manifiesto() {
 
           <p className={styles.paragraph}>
             Guitarras afiladas, tachas, cuero y velocidad analógica pura.
-            Nacidos en las entrañas de la escena underground chilena,{' '}
-            <strong className={styles.highlight}>D.A.G.E.R.</strong>{' '}
-            rescata el espíritu más violento y crudo de la Nueva Ola
-            de Heavy Metal Tradicional (NWOTHM). No hacemos prisioneros.
+            Grabamos como se grababa antes: en caliente, sin pulir de más,
+            dejando que el riff respire y el groove pegue donde tiene
+            que pegar. <strong className={styles.highlight}>D.A.G.E.R.</strong>{' '}
+            suena a Hard Rock y Glam Metal de los 80, tocado con la rabia
+            de la calle de hoy.
+          </p>
+
+          <p className={styles.paragraph}>
+            Sin sintetizadores de relleno, sin pose de estudio. Cada pista
+            de <strong className={styles.highlight}>Wild in the Streets</strong>{' '}
+            está pensada para sonar igual en un parlante de garage que en
+            un escenario lleno. No hacemos prisioneros.
           </p>
         </motion.div>
 

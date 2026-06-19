@@ -235,8 +235,8 @@ function Hero() {
           aria-label="Información de la banda"
         >
           <div className={styles.showItem} role="listitem">
-            <span className={styles.showItemLabel}>Próximo show</span>
-            <span className={`${styles.showItemValue} ${styles.accent}`}>Santiago</span>
+            <span className={styles.showItemLabel}>Líder</span>
+            <span className={`${styles.showItemValue} ${styles.accent}`}>Ossex</span>
           </div>
           <div className={styles.showItem} role="listitem">
             <span className={styles.showItemLabel}>Género</span>
@@ -244,7 +244,7 @@ function Hero() {
           </div>
           <div className={styles.showItem} role="listitem">
             <span className={styles.showItemLabel}>Origen</span>
-            <span className={styles.showItemValue}>Chile</span>
+            <span className={styles.showItemValue}>Melipilla</span>
           </div>
           <div className={styles.showItem} role="listitem">
             <span className={styles.showItemLabel}>Lanzamiento</span>

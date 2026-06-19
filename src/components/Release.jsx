@@ -204,7 +204,7 @@ function Release() {
           {/* Pie del frame */}
           <div className={styles.teaserCaption} aria-hidden="true">
             <span className={styles.captionText}>
-              D.A.G.E.R. — <span>Próximo Single // 2025</span>
+              D.A.G.E.R. — <span>Próximo Single // 2026</span>
             </span>
             <span className={styles.captionText}>STG-002</span>
           </div>

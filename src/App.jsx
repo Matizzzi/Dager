@@ -2,17 +2,19 @@ import Hero from './components/Hero';
 import Manifiesto from './components/Manifiesto';
 import Release from './components/Release';
 import Tour from './components/Tour';
-import Newsletter from './components/Newsletter';
 import { Instagram, Youtube } from 'lucide-react';
-
+import Bio from './components/Bio';
+import Social from './components/Social';
 function App() {
   return (
     <div>
       <Hero />
-      <Manifiesto />      {/* ← sin la 'a' extra */}
-      <Release />
+<Bio />
+<Manifiesto />
+<Release />
       <Tour />
-      <Newsletter />
+      <Social />
+      
 
       <footer style={{ backgroundColor: '#0b0b0b', padding: '3rem 2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginBottom: '1.5rem' }}>
@@ -24,10 +26,13 @@ function App() {
           </a>
         </div>
         <p style={{ fontSize: '0.9rem', color: '#b0b0b0' }}>
-          Booking & Contacto: <strong style={{ color: 'white' }}>management@bandadager.com</strong>
+          Booking & Contacto: <strong style={{ color: 'white' }}>dager.banda@gmail.com</strong>
         </p>
         <p style={{ fontSize: '0.8rem', color: '#444', marginTop: '1.5rem' }}>
           © 2026 D.A.G.E.R. All Rights Reserved. Pure Evil Rock 'N' Roll.
+        </p>
+        <p style={{ fontSize: '0.75rem', color: '#333', marginTop: '0.75rem' }}>
+          Sitio por Matías Santelices — <a href="mailto:mati.santelicess@gmail.com" style={{ color: '#555' }}>mati.santelicess@gmail.com</a>
         </p>
       </footer>
     </div>
